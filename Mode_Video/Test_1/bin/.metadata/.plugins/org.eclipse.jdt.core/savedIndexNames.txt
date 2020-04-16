@@ -1,0 +1,1 @@
+INDEX VERSION 1.131+C:\Users\sonsy\Documents\GitHub\Multi_Grad_Proj\Mode_Video\Test_1\.metadata\.plugins\org.eclipse.jdt.core
