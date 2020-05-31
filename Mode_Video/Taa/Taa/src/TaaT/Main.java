@@ -11,12 +11,13 @@ public class Main extends PApplet {
 
 	static final short minBrightness = 120;
 	static final short fade = 75;
-	static final int pixelSize = 20;
+	static final int pixelSize = 50;
 	static final boolean useFullScreenCaps = true;
 	static final int timeout = 5000; // 5 seconds
 	static final int displays[][] = new int[][] { { 0, 7, 5 } };
-	static final int leds[][] = new int[][] { { 0, 3, 4 }, { 0, 2, 4 }, { 0, 1, 4 }, { 0, 0, 4 }, // Bottom edge, left
-																									// half
+	static final int leds[][] = new int[][] { 
+		
+			{ 0, 3, 4 }, { 0, 2, 4 }, { 0, 1, 4 }, { 0, 0, 4 }, // Bottom edge, left half
 			{ 0, 0, 3 }, { 0, 0, 2 }, { 0, 0, 1 }, // Left edge
 			{ 0, 0, 0 }, { 0, 1, 0 }, { 0, 2, 0 }, { 0, 3, 0 }, { 0, 4, 0 }, // Top edge
 			{ 0, 5, 0 }, { 0, 6, 0 }, // More top edge
@@ -64,7 +65,7 @@ public class Main extends PApplet {
 			try {
 				bot[d] = new Robot(gd[displays[d][0]]);   // 화면을 캠쳐 할수 있는 봇 만들기 
 			} catch (AWTException e) {
-				System.out.println("new Robot() failed");
+				//System.out.println("new Robot() failed");
 				continue;
 			}
 
@@ -95,24 +96,13 @@ public class Main extends PApplet {
 			for (row = 0; row < 16; row++)
 				y[row] = (int) (start + step * (float) row);
 
-			if (useFullScreenCaps == true) {
-
+	
 				for (row = 0; row < 16; row++) {
 					for (col = 0; col < 16; col++) {
 						pixelOffset[i][row * 16 + col] = y[row] * dispBounds[d].width + x[col];
 					}
 				}
 			}
-
-			else {
-				ledBounds[i] = new Rectangle(x[0], y[0], x[15] - x[0] + 1, y[15] - y[0] + 1);
-				for (row = 0; row < 16; row++) {
-					for (col = 0; col < 16; col++) {
-						pixelOffset[i][row * 16 + col] = (y[row] - y[0]) * ledBounds[i].width + x[col] - x[0];
-					}
-				}
-			}
-		}
 
 		for (i = 0; i < prevColor.length; i++) {
 			prevColor[i][0] = prevColor[i][1] = prevColor[i][2] = minBrightness / 3;
@@ -179,18 +169,19 @@ public class Main extends PApplet {
 			if (useFullScreenCaps == true) {
 				// Get location of source data from prior full-screen capture:
 				pxls = screenData[d];
-			} else {
-				img = bot[d].createScreenCapture(ledBounds[i]);
-				pxls = ((DataBufferInt) img.getRaster().getDataBuffer()).getData();
-			}
+			} 
 					// y*n + x
 			offs = pixelOffset[i];
 			rb = g = 0;
 			//System.out.println(pxls.length);
 			for (o = 0; o < 256; o++) {   //화면에서 받은 256개의 픽셀값 
+				int maxc=0;
+				int minc=9999;
 				for(int x = -1; x<1;++x) {
 					for(int y = -1;y<1;++y) {
 						c = pxls[offs[o]+(x*dispBounds[d].width+y)];
+						if(maxc<c)maxc =c;
+						if(minc>c)minc =c;
 						rb += c & 0x00ff00ff; //red and blue 는 중첩해서 사용 가능 
 						g += c & 0x0000ff00;
 					}
@@ -199,6 +190,10 @@ public class Main extends PApplet {
 				//c = pxls[offs[o]];     //c: 픽셀의 색 
 				//rb += c & 0x00ff00ff; //red and blue 는 중첩해서 사용 가능 
 				//g += c & 0x0000ff00; 
+				rb -= ((maxc/256)) & 0x00ff00ff; 
+				g -= ((maxc/256)) & 0x0000ff00;
+				rb -= ((minc/256)) & 0x00ff00ff; 
+				g -= ((maxc/256)) & 0x0000ff00;
 			}
 
 			ledColor[i][0] = (short) ((((rb >> 24) & 0xff) * weight + prevColor[i][0] * fade) >> 8);
@@ -245,8 +240,8 @@ public class Main extends PApplet {
 			i += displays[d][1] + 1;
 		}
 
-		println(frameRate); // How are we doing?
-
+		//println(frameRate); // How are we doing?
+		
 		// Copy LED color data to prior frame array for next pass
 		arraycopy(ledColor, 0, prevColor, 0, ledColor.length);
 	}
@@ -309,8 +304,9 @@ public class Main extends PApplet {
 	}
 
 	public static void main(String[] args) {
-
+		
 		String[] processingArgs = { "MySketch" };
+		
 		Main mySketch = new Main();
 		PApplet.runSketch(processingArgs, mySketch);
 
