@@ -11,44 +11,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Main2 extends PApplet {
+public class Main_Class extends PApplet {
    
    static JFrame frm = new JFrame("Express Terminal");      
    static JFrame frm2 = new JFrame("Express Terminal Settings");
    static final short minBrightness = 120;
    static final short fade = 75;
    static final int pixelSize = 50;
-   static final boolean useFullScreenCaps = true;
-   static final int timeout = 5000; // 5 seconds
-   static final int displays[][] = new int[][] { { 0, 7, 5 } };
-   static final int leds[][] = new int[][] { 
-      
-      { 0, 3, 4 }, { 0, 2, 4 }, { 0, 1, 4 }, { 0, 0, 4 }, // Bottom edge, left half
-      { 0, 0, 3 }, { 0, 0, 2 }, { 0, 0, 1 }, // Left edge
-      { 0, 0, 0 }, { 0, 1, 0 }, { 0, 2, 0 }, { 0, 3, 0 }, { 0, 4, 0 }, // Top edge
-      { 0, 5, 0 }, { 0, 6, 0 }, // More top edge
-      { 0, 6, 1 }, { 0, 6, 2 }, { 0, 6, 3 }, { 0, 6, 4 }, // Right edge
-      { 0, 5, 4 }, { 0, 4, 4 } // Bottom edge, right half
+ 
 
-};
-   byte[] serialData = new byte[6 + leds.length * 3];
-   short[][] ledColor = new short[leds.length][3], prevColor = new short[leds.length][3];
-   byte[][] gamma = new byte[256][3];
-   int nDisplays = displays.length;
-   Robot[] bot = new Robot[displays.length];
-   Rectangle[] dispBounds = new Rectangle[displays.length], ledBounds; // Alloc'd only if per-LED captures
-   int[][] pixelOffset = new int[leds.length][256], screenData; // Alloc'd only if full-screen captures
-   PImage[] preview = new PImage[displays.length];
-   Serial port;
-   Main dh; // For disabling LEDs on exit
-   
-   
-   ///if Using ard in this 
-   /*byte[] serialData = new byte[6 + leds.length * 3];
-   Serial Port;
-   
-   static final int timeout  = 5000;  // 5 seconds*/
-    
     static void runCommand(String[] cmd){
 
           String s = null;
@@ -151,30 +122,26 @@ public class Main2 extends PApplet {
            
         });
         btn1.addActionListener(event -> {
-           /*Runtime rt = Runtime.getRuntime();
+           Runtime rt = Runtime.getRuntime();
           Process pc = null;
            
-          Main MainDup = new Main();
-          String[] processingArgs = { "MySketch" };
-          Main mySketch = new Main();
-          PApplet.runSketch(processingArgs, mySketch);*/
-          //MainDup.setup();
+          Main_Class MainDup = new  Main_Class();
+          String[] processingArgs = { "Video_Class" };
+          Main_Class mySketch = new  Main_Class();
+          PApplet.runSketch(processingArgs, mySketch);
+          MainDup.setup();
           
            
         });
         btn2.addActionListener(event -> {
-           /*Runtime rt = Runtime.getRuntime();
-          Process pc = null;
-           
-          Runtime rt = Runtime.getRuntime();
-          Process pc = null;
-           
-          Main MainDup = new Main();
-          String[] processingArgs = { "Main" };
-          Main mySketch = new Main();
-          PApplet.runSketch(processingArgs, mySketch);*/
-          //MainDup.setup();
-           
+        	 Runtime rt = Runtime.getRuntime();
+             Process pc = null;
+              
+             Main_Class MainDup = new  Main_Class();
+             String[] processingArgs = { "Music_Class" };
+             Main_Class mySketch = new  Main_Class();
+             PApplet.runSketch(processingArgs, mySketch);
+             MainDup.setup();
         });
         btn3.addActionListener(event -> {
            Runtime rt = Runtime.getRuntime();

@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class SketchTest extends PApplet {
+public class Game_Class extends PApplet {
 
 	/////////////////¼±¾ð/////////////////
 	
@@ -185,7 +185,7 @@ public class SketchTest extends PApplet {
 		
 		String[] processingArgs = { "MySketch" };
 		
-		SketchTest mySketch = new SketchTest();
+		Game_Class mySketch = new Game_Class();
 		PApplet.runSketch(processingArgs, mySketch);
 
 		
