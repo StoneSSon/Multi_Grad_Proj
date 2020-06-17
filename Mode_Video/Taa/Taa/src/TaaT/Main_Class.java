@@ -100,7 +100,7 @@ public class Main_Class extends PApplet {
         
         btn1.addActionListener(event -> {
            
-           /*Runtime rt = Runtime.getRuntime();
+           Runtime rt = Runtime.getRuntime();
           Process pc = null;
            
            try {
@@ -117,7 +117,7 @@ public class Main_Class extends PApplet {
              //if (port != null)
                 //port.write(serialData);
              
-          }*/
+          }
            
            
         });
@@ -144,8 +144,14 @@ public class Main_Class extends PApplet {
              MainDup.setup();
         });
         btn3.addActionListener(event -> {
-           Runtime rt = Runtime.getRuntime();
-          Process pc = null;
+        	Runtime rt = Runtime.getRuntime();
+            Process pc = null;
+             
+            Main_Class MainDup = new  Main_Class();
+            String[] processingArgs = { "Sound_Class" };
+            Main_Class mySketch = new  Main_Class();
+            PApplet.runSketch(processingArgs, mySketch);
+            MainDup.setup();
            
            
         });

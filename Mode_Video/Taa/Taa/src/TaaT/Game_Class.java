@@ -38,6 +38,8 @@ public class Game_Class extends PApplet {
 	
 	public void setup() {
 		  size(300,150);
+		  String portName = Serial.list()[3];
+		  port = new Serial(this, portName, 9600);
 		}
 		 
 	public void draw() {
@@ -63,22 +65,22 @@ public class Game_Class extends PApplet {
 		if(counter<2)
 		{
 		//LED Grey
-			
+			 setRGB(0,0,0,0);
 		}
 		else if(counter<4)
 		{
 		//LED RED
-			
+			 setRGB(255,0,0,0);
 		}
 		else if(counter<7)
 		{
 		//LED Yellow
-			
+			 setRGB(255,255,0,0);
 		}
 		else
 		{
 		//LED Green
-			
+			 setRGB(0,255,0,0);
 		}
 	}
 	
@@ -107,7 +109,7 @@ public class Game_Class extends PApplet {
 	public void mousePressed() {
 		background(64);
 	}
-	public Serial openPort() {
+	/*public Serial openPort() {
 		String[] ports;
 		String ack;
 		int i, start;
@@ -143,8 +145,16 @@ public class Game_Class extends PApplet {
 		}
 
 		return new Serial(this, ports[0], 115200);
-	}
+	}*/
 
+	void setRGB (int r, int g, int b, int led) {
+		 port.write('S');
+		 port.write(r);
+		 port.write(g);
+		 port.write(b);
+		 port.write(led);
+		}
+	
 	public void dispose() {
 
 		// Fill serialData (after header) with 0's, and issue to Arduino...
