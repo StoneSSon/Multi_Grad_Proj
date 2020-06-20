@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class Game_Class extends PApplet {
 
-   static int[] i_array = new int[8]; //초기값 0
+   static int[] i_array = {570,615,300,50}; //초기값 0
    static int[] color = new int[10]; //초기값 0
    static PImage screenshot;
    static final int timeout = 5000; // 5 seconds
@@ -29,25 +29,31 @@ public class Game_Class extends PApplet {
 
 //        String portName = Serial.list()[3];
  //       println(Serial.list());
-         port = new Serial(this, "COM10", 9600);
+     //    port = new Serial(this, "COM10", 9600);
       }
        
    public void draw() {
 	   counter=0;
-        if (frameCount % 60 == 0) screenshot();
+        if (frameCount % 30 == 0) screenshot();
         if (screenshot != null) {
            image(screenshot,0,0,width,height);
-           int main_color=screenshot.get(0, 0);
-           
+           int main_color=screenshot.get(0, 1);
+           int sub_color=screenshot.get(10, 1);
+          
+           //println(sub_color);
            for(int i=0 ; i <10 ; i++) {
-             color[i] =screenshot.get(i_array[2]/11 * i, 0);
-             if(color[i]==main_color)
+             color[i] =screenshot.get(i_array[2]/11 * i, 0);	 
+        	  // println("Main"+main_color);
+        	  // println("Sub"+color[i]);
+        	  // println(abs(color[i]-main_color));
+             if(color[i]<-1000)
              {
                 counter ++;
              }
            }
            println(counter-1);
-           toLED(counter-1);
+          // port.write(counter-1);
+          // toLED(counter-1);
         }
       }
    //체력 퍼센트를 읽는 카운터의 값을 읽는다.
@@ -139,7 +145,7 @@ public class Game_Class extends PApplet {
    }*/
 
    void setRGB (int r, int g, int b, int led) {
-       port.write(counter);
+    //   port.write(counter);
 //       port.write(r);
 //       port.write(g);
 //       port.write(b);
@@ -172,10 +178,7 @@ public class Game_Class extends PApplet {
         }catch(IOException e){
             System.out.println(e);
         }*/
-	   i_array[0] =0;
-	   i_array[1] =0;
-	   i_array[2] =300;
-	   i_array[3] =500;
+	   
       String[] processingArgs = { "MySketch" };
       
       Game_Class mySketch = new Game_Class();
