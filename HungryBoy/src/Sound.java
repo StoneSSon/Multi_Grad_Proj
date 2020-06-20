@@ -34,8 +34,8 @@ public class Sound extends PApplet {
 
 		textSize(12);
 		println("Available serial ports:");
-	//	println(Serial.list()); //체크 후 연결 할 Serial Port 찾아야 한다
-	//	port = new Serial(this, Serial.list()[2], 9600);
+		println(Serial.list()); //체크 후 연결 할 Serial Port 찾아야 한다
+		port = new Serial(this, Serial.list()[2], 9600);
 
 	}
 

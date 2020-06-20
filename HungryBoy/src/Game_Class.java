@@ -28,8 +28,8 @@ public class Game_Class extends PApplet {
 //        size(300,150);
 
 //        String portName = Serial.list()[3];
- //       println(Serial.list());
-     //    port = new Serial(this, "COM10", 9600);
+		println(Serial.list()); //체크 후 연결 할 Serial Port 찾아야 한다
+		port = new Serial(this, Serial.list()[2], 9600);
       }
        
    public void draw() {
@@ -52,7 +52,7 @@ public class Game_Class extends PApplet {
              }
            }
            println(counter-1);
-          // port.write(counter-1);
+           port.write(counter-1);
           // toLED(counter-1);
         }
       }
