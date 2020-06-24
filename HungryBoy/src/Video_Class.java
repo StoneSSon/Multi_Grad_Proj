@@ -229,8 +229,8 @@ public class Video_Class extends PApplet {
       }
 
       println("Available serial ports:");
-      println(Serial.list());
-      port = new Serial(this, "COM6", 9600);
+     // println(Serial.list());
+     // port = new Serial(this, "COM6", 9600);
 
    }
    

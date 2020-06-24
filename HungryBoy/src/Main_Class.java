@@ -38,7 +38,7 @@ public class Main_Class extends JFrame {
       setTitle("졸작 화이팅입니다!");
       setSize(500, 500);
       setLocationRelativeTo(null);
-      setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+      //setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE );
 
       // 레이아웃 설정
       setLayout(null);
@@ -63,7 +63,7 @@ public class Main_Class extends JFrame {
       JButton btn1 = new JButton(new ImageIcon("img/video.png"));
       JButton btn2 = new JButton(new ImageIcon("img/sound.png"));
       JButton btn3 = new JButton(new ImageIcon("img/game.png"));
-      JButton btn4 = new JButton(new ImageIcon("img/settings.png"));
+     // JButton btn4 = new JButton(new ImageIcon("img/settings.png"));
       JButton btn5 = new JButton(new ImageIcon("img/exit.png"));
       JButton btn5_2 = new JButton("exit");//exit
       //
@@ -73,7 +73,7 @@ public class Main_Class extends JFrame {
       btn1.setBounds(200, 160, 100, 30);
       btn2.setBounds(200, 200, 100, 30);
       btn3.setBounds(200, 240, 100, 30);
-      btn4.setBounds(200, 280, 100, 30);
+     // btn4.setBounds(200, 280, 100, 30);
       btn5.setBounds(200, 320, 100, 30);
       btn5_2.setBounds(200, 270, 100, 20);
 
@@ -82,7 +82,7 @@ public class Main_Class extends JFrame {
       btn1.setPressedIcon(new ImageIcon("img/video_p.png"));
       btn2.setPressedIcon(new ImageIcon("img/sound_p.png"));
       btn3.setPressedIcon(new ImageIcon("img/game_p.png"));
-      btn4.setPressedIcon(new ImageIcon("img/exit_p.png"));
+     // btn4.setPressedIcon(new ImageIcon("img/exit_p.png"));
       btn5.setFocusPainted(false);
       btn5_2.setContentAreaFilled(false);
       
@@ -99,9 +99,9 @@ public class Main_Class extends JFrame {
       btn3.setFocusPainted(false);
       btn3.setContentAreaFilled(false);
       
-      btn4.setBorderPainted(true);
-      btn4.setFocusPainted(false);
-      btn4.setContentAreaFilled(false);
+    //  btn4.setBorderPainted(true);
+     // btn4.setFocusPainted(false);
+    //  btn4.setContentAreaFilled(false);
 
       btn5.setBorderPainted(true);
       btn5.setFocusPainted(false);
@@ -115,7 +115,7 @@ public class Main_Class extends JFrame {
       layeredPane.add(btn1);
       layeredPane.add(btn2);
       layeredPane.add(btn3);
-      layeredPane.add(btn4);
+     // layeredPane.add(btn4);
       layeredPane.add(btn5);
       //layeredPane.add(btn5_2);
 
@@ -141,7 +141,8 @@ public class Main_Class extends JFrame {
       btn1.addActionListener(event -> {
          
          String[] processingArgs = { "Video_Class" };
-          PApplet SoundSketch = new Sound();
+          PApplet SoundSketch = new Video_Class();
+          
           PApplet.runSketch(processingArgs, SoundSketch);
          
     
@@ -158,16 +159,16 @@ public class Main_Class extends JFrame {
 
       });
       btn3.addActionListener(event -> {
-         Runtime rt = Runtime.getRuntime();
-         Process pc = null;
-
+    	  String[] processingArgs = { "Game_Class" };
+          PApplet SoundSketch = new Game_Class();
+          PApplet.runSketch(processingArgs, SoundSketch);
       });
-      btn4.addActionListener(event -> {
-         Runtime rt = Runtime.getRuntime();
-         Process pc = null;
+    //  btn4.addActionListener(event -> {
+     //    Runtime rt = Runtime.getRuntime();
+      //   Process pc = null;
 
          //frm2.setVisible(true);
-      });
+    //  });
       btn5.addActionListener(event -> {
          Runtime rt = Runtime.getRuntime();
          Process pc = null;

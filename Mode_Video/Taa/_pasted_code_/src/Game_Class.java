@@ -13,25 +13,30 @@ import java.io.IOException;
 
 public class Game_Class extends PApplet {
 
-   static int[] i_array = {210,1000,200,50}; //초기값 0
+   static int[] i_array = {570,615,300,50}; //초기값 0
    static int[] color = new int[10]; //초기값 0
    static PImage screenshot;
    static final int timeout = 5000; // 5 seconds
    
    Serial port;
    
-   int counter;
+   int counter =1;
+   
+   
    
    public void setup() {
 //        size(300,150);
 
 //        String portName = Serial.list()[3];
-		//println(Serial.list()); //체크 후 연결 할 Serial Port 찾아야 한다
-		//port = new Serial(this, Serial.list()[2], 9600);
+//      println(Serial.list()); //체크 후 연결 할 Serial Port 찾아야 한다
+      //port = new Serial(this, Serial.list()[1], 9600);
       }
        
    public void draw() {
-	   counter=0;
+      
+      //port.write(counter);
+   
+      counter=0;
         if (frameCount % 30 == 0) screenshot();
         if (screenshot != null) {
            image(screenshot,0,0,width,height);
@@ -40,17 +45,17 @@ public class Game_Class extends PApplet {
           
            //println(sub_color);
            for(int i=0 ; i <10 ; i++) {
-             color[i] =screenshot.get(i_array[2]/11 * i, 0);	 
-        	   println("Main"+main_color);
-        	   println("Sub"+color[i]);
-        	  // println(abs(color[i]-main_color));
-             if(color[i]>-15000000)
+             color[i] =screenshot.get(i_array[2]/11 * i, 0);    
+             // println("Main"+main_color);
+             // println("Sub"+color[i]);
+             // println(abs(color[i]-main_color));
+             if(color[i]<-1000)
              {
                 counter ++;
              }
            }
-           println("Counter"+( counter-1) + "0%");
-          // port.write(counter-1);
+           println(counter-1);
+           //port.write(counter-1);
           // toLED(counter-1);
         }
       }
@@ -88,7 +93,7 @@ public class Game_Class extends PApplet {
       }
    //애플릿의 크기
    public void settings() {
-      size(300, 50);
+      size(500, 500);
    }
 
    /*
@@ -176,8 +181,9 @@ public class Game_Class extends PApplet {
         }catch(IOException e){
             System.out.println(e);
         }*/
-	   
+      
       String[] processingArgs = { "MySketch" };
+      
       Game_Class mySketch = new Game_Class();
       PApplet.runSketch(processingArgs, mySketch);      
    }
